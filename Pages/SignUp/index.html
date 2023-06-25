@@ -1,31 +1,25 @@
-<!-- TODO: Implement the following SignUp -->
-
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <form id="signup-form">
-    <label for="username">Username:</label>
-    <input type="text" id="username" required>
-  
-    <label for="password">Password:</label>
-    <input type="password" id="password" required>
-  
-    <label for="contact">Email or Phone:</label>
-    <input type="text" id="contact" required>
-  
-    <label for="user-type">User Type:</label>
-    <select id="user-type" required>
-      <option value="">Select</option>
-      <option value="creator">Creator</option>
-      <option value="user">User</option>
-    </select>
-  
-    <button type="submit">Sign Up</button>
-  </form>
+  <div class="container">
+    <form id="signup-form">
+      <h1 class="header">Sign Up</h1>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="tel" id="phone" placeholder="Phone" required>
+      <select id="user-type" required>
+        <option value="" disabled selected>Select User Type</option>
+        <option value="creator">Creator</option>
+        <option value="user">User</option>
+      </select>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="error-message" style="display: none; color: red;"></div>
+  </div>
 
-  
+  <script src="script.js"></script>
 </body>
 </html>
