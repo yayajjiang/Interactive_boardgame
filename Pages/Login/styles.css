@@ -3,15 +3,47 @@ body {
   }
   
   .form {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    width: 30em;
+    height: 18em;
+    transform: translate(-50%, -50%);
+    background-color: #f8fcfb;
+    position: fixed;
+    padding: 20px;
+    padding-top: 20px;
+  }
+
+  .form h2 {
+    font-family:  Consolas, Arial, sans-serif;
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 20px;
+    font-style: italic;
+  }
+
+
+  .form #sign-up {
+    font-size: 15px;
+    font-style: italic;
+    padding-top: 15px;
+    display: inline-block;
+  }
+
+  
+  .form #forget-pw {
+    font-size: 15px;
+    font-style: italic;
+    padding-top: 15px;
+    display: block;
   }
   
+  
+  
   .form input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
   }

@@ -3,9 +3,7 @@ function login() {
     const password = document.getElementById('password').value;
   
     if (username === 'admin' && password === 'password') {
-      document.getElementById('login-form').style.display = 'none';
-      document.getElementById('home-page').style.display = 'block';
-      document.getElementById('user').textContent = username;
+      window.location.href = '../UserPage/index.html';
     } else {
       alert('Invalid username or password');
     }
