@@ -11,3 +11,6 @@ function login() {
     }
   }
   
+  function Singup() {
+    
+  }
