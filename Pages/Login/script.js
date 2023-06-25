@@ -9,6 +9,6 @@ function login() {
     }
   }
   
-  function Singup() {
-    
+  function SignUp() {
+    window.location.href = '../SignUp/index.html';
   }

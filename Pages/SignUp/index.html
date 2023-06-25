@@ -1,12 +1,30 @@
+<!-- TODO: Implement the following SignUp -->
+
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div>
-    <h2>Sign up Page</h2>
-  </div>
+  <form id="signup-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required>
+  
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+  
+    <label for="contact">Email or Phone:</label>
+    <input type="text" id="contact" required>
+  
+    <label for="user-type">User Type:</label>
+    <select id="user-type" required>
+      <option value="">Select</option>
+      <option value="creator">Creator</option>
+      <option value="user">User</option>
+    </select>
+  
+    <button type="submit">Sign Up</button>
+  </form>
 
   
 </body>
