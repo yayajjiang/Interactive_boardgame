@@ -1,0 +1,53 @@
+// Create the Database
+const db = require('./server');
+const app = express();
+
+
+app.get('/createDB', (req, res) => {
+    let sql = 'CREATE DATABASE BoardGameDB';
+    db.query(sql, err => {
+        if(err) {
+            throw err;
+        }
+        res.send('BoardGameDB Created');
+    })
+});
+
+// Create a table
+app.get('/createUserAccount', (req, res) => {
+    let sql = 'CREATE TABLE User\
+    (id int AUTO_INCREMENT PRIMARY KEY,\
+        username VARCHAR(50) NOT NULL,\
+        password VARCHAR(255) NOT NULL,\
+        phone VARCHAR(20) NOT NULL)';
+
+    db.query(sql, err => {
+        if (err) {
+            throw err;
+        }
+        res.send('UserAccount table created');
+    });
+});
+
+// Insert an account
+app.get('/User1', (req, res) => {
+    let user1 = 
+    {
+        username: 'root',
+        password: 'admin',
+        phone: '6268002222'
+    };
+
+    let sql = 'INSERT INTO UserAccount SET ?';
+
+    let query = db.query(sql,user1, err => {
+        if (err) {
+            throw err;
+        }
+        res.send('User1 added');
+    });
+});
+
+app.listen('3000', () => {
+    console.log("Server Started at Port 3000");
+})
