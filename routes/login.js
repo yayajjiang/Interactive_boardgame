@@ -6,8 +6,8 @@ router.get('/', function(req, res, next) {
     res.render('login');
 });
 
-router.post('/login', function(req, res, next) {
-
+router.post('/', function(req, res, next) {
+  res.send("send");
   console.log("Get inside router.");
   var user_name = req.body.username;
   console.log("🚀 ~ file: login.js:13 ~ router.post ~ user_name:", user_name)

@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
     res.render('signup');
 });
 
+router.post('/', function(req, res, next) {
+    res.send("signup load successful");
+});
+
 module.exports = router;
