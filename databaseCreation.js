@@ -1,5 +1,6 @@
 // Create the Database
 const db = require('./server');
+const express = require('express');
 const app = express();
 
 
@@ -38,7 +39,7 @@ app.get('/User1', (req, res) => {
         phone: '6268002222'
     };
 
-    let sql = 'INSERT INTO UserAccount SET ?';
+    let sql = 'INSERT INTO USER SET ?';
 
     let query = db.query(sql,user1, err => {
         if (err) {
