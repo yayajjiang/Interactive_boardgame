@@ -1,3 +1,7 @@
+/*
+ For the first time set up DataBase Usage
+*/
+
 // Create the Database
 const db = require('./server');
 const express = require('express');
@@ -49,6 +53,6 @@ app.get('/User1', (req, res) => {
     });
 });
 
-app.listen('3000', () => {
-    console.log("Server Started at Port 3000");
-})
+// app.listen('3000', () => {
+//     console.log("Server Started at Port 3000");
+// })

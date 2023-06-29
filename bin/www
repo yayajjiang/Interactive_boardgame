@@ -88,3 +88,16 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+// Terminate the server
+function shutdown() {
+  server.close(function() {
+    console.log('Server has been terminated');
+    process.exit(0); // Exit the Node.js process
+  });
+}
+
+// Handle termination signals
+process.on('SIGINT', shutdown); // Ctrl+C
+process.on('SIGTERM', shutdown); // Termination signal
