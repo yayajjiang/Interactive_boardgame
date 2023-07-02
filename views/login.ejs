@@ -6,12 +6,15 @@
 <body>
   <div id="login-form" class="form">
     <h2>Login</h2>
+    <% if (typeof message !== 'undefined') { %>
+      <p><%= message %></p>
+    <% } %>
     <form action="/login" method="post">
       <input type="text" id="username" name="username" placeholder="Username">
       <input type="password" id="password" name="password" placeholder="Password">
       <button type="submit">Login</button>
     </form>
-    <a id="sign-up" href="/signup" onclick="SignUp()">Don't have an account? Sign up! </a>
+    <a id="sign-up" href="/signup" onclick="SignUp()">Don't have an account? Sign up now! </a>
     <a id="forget-pw" href="/forgetpw" onclick="ForgotPassword()">Forget Password? </a>
   </div>
   <script src="/Pages/Login/script.js"></script>

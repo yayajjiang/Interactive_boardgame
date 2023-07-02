@@ -6,6 +6,7 @@ form {
   justify-content: center;
   align-items: center;
   height: 300px;
+  padding-bottom: 50px;
 }
 
 .label {
@@ -37,7 +38,7 @@ option[disabled]:first-child {
 }
 
 button[type="submit"] {
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px 15px;
   background-color: #4CAF50;
   color: white;
@@ -55,7 +56,7 @@ button[type="submit"]:hover {
   font-size: 32px;
   font-weight: bold;
   padding: 20px;
-  padding-top: 5px;
+  padding-top: 20px;
 }
 
 .container {
@@ -69,4 +70,8 @@ button[type="submit"]:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#error-message {
+  padding-top: 50px;
 }

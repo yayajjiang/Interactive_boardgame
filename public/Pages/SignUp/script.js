@@ -9,17 +9,40 @@ usernameInput.addEventListener('input', function(event) {
 
   // Check the username
   // at least 3 characters contains only numbers, letters and underscore
-  var isValidUsername = /^[a-zA-Z0-9_]{3,10}$/.test(usernameValue);
-
-  // Check if the UserName is already exist (need to check in the database)
-  // TODO: After Set up a database
+  var isValidUsername = /^[a-zA-Z][a-zA-Z]{2,9}$/.test(usernameValue);
 
   if (!isValidUsername) {
     errorMessage.textContent = 'Invalid username. Username must contain at least 3\
-     characters and only contain letters, numbers, and underscores.';
+     characters START with letter and only contain letters, numbers, and underscores.';
     errorMessage.style.display = 'block';
+    event.preventDefault(); // Prevent form submission to a server
   } else {
-    errorMessage.style.display = 'none';
+    // Make a GET request to the server with the username
+    fetch(`/signup/checkUsername/${usernameValue}`)
+      .then(response => {
+        // Check if the fetch made a successful request
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        return response.json();
+      })
+      .then(data => {
+        if (data.usernameExists) {
+          // Show error that username exists
+          errorMessage.textContent = 'Username is already taken. Please try another one.';
+          errorMessage.style.display = 'block';
+        }
+        else {
+          // Hide error message
+          errorMessage.style.display = 'none';
+        }
+
+      })
+      .catch((error) => {
+        // This is where you run code if the server returns any errors
+        console.error('There has been a problem with your fetch operation:', error);
+      }); 
   }
 
 });
@@ -46,9 +69,27 @@ passwordInput.addEventListener('input', function(event) {
     errorMessage.textContent = 'Invalid Password. Password must contain at least 8\
      characters and only contain letters, numbers, and special symbol(no space).';
     errorMessage.style.display = 'block';
+    event.preventDefault(); // Prevent form submission to a server
   } else {
     errorMessage.style.display = 'none';
   }
+});
+
+// Check for Confirm Password
+var confirmPasswordInput = document.getElementById('confirm_password');
+confirmPasswordInput.addEventListener('input', function(event) {
+  var passwordValue = document.getElementById('password').value;
+  var confirmPasswordValue = event.target.value;
+
+  if (passwordValue != confirmPasswordValue) {
+    errorMessage.textContent = 'Confirm Password is different';
+    errorMessage.style.display = 'block';
+    event.preventDefault(); // Prevent form submission to a server
+  }
+  else {
+    errorMessage.style.display = 'none';
+  }
+
 });
 
 // Check for Phone number
@@ -66,6 +107,7 @@ phoneInput.addEventListener('input', function(event) {
   if (!isValidPhoneNumber) {
     errorMessage.textContent = 'Invalid phone number. Please enter a valid phone number.';
     errorMessage.style.display = 'block';
+    event.preventDefault(); // Prevent form submission to a server
   }
   else {
     errorMessage.style.display = 'none';
@@ -74,7 +116,7 @@ phoneInput.addEventListener('input', function(event) {
 
 
 document.getElementById('signup-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission to a server
+    // event.preventDefault(); // Prevent form submission to a server
   
     // Retrieve form field values
     var username = document.getElementById('username').value;
