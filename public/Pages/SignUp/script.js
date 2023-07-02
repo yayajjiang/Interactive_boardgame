@@ -9,7 +9,7 @@ usernameInput.addEventListener('input', function(event) {
 
   // Check the username
   // at least 3 characters contains only numbers, letters and underscore
-  var isValidUsername = /^[a-zA-Z][a-zA-Z]{2,9}$/.test(usernameValue);
+  var isValidUsername = /^[a-zA-Z][a-zA-Z0-9_]{2,9}$/.test(usernameValue);
 
   if (!isValidUsername) {
     errorMessage.textContent = 'Invalid username. Username must contain at least 3\
@@ -17,6 +17,7 @@ usernameInput.addEventListener('input', function(event) {
     errorMessage.style.display = 'block';
     event.preventDefault(); // Prevent form submission to a server
   } else {
+    errorMessage.style.display = 'none';
     // Make a GET request to the server with the username
     fetch(`/signup/checkUsername/${usernameValue}`)
       .then(response => {

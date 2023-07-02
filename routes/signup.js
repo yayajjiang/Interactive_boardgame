@@ -9,44 +9,78 @@ router.get('/', function(req, res, next) {
     res.render('signup');
 });
 
+
 router.post('/', async (req, res, next) => {
-    // try {
-    //     // hash the password
-    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
 
-    //     // First check if username already exists
-    //     let checkSql = 'SELECT * FROM employee WHERE username = ?';
-    //     db.query(checkSql, [user.username], (err, result) => {
-    //         if (err) throw err;
+        // Validate the username again as in the client side
+        var isValidUsername = /^[a-zA-Z][a-zA-Z0-9_]{2,9}$/.test(username);
 
-    //         if(result.length > 0) {
-    //             // User exists
-    //             console.log('Username is already taken');
-    //             res.redirect('/signup');
-    //         } else {
-    //             // User does not exist, proceed to insert
-    //             let insertSql = 'INSERT INTO employee SET ?';
-                
-    //             // JSON Object
-    //             const user = {
-    //                 username: req.body.username,
-    //                 password: hashedPassword,
-    //                 phone: req.body.phone
-    //             };
+        if (!isValidUsername) {
+            console.log('Invalid username');
+            return res.redirect('./signup');
+        }
 
-    //             db.query(insertSql, user, (err) => {
-    //                 if(err) throw err;
-    //                 console.log("User created successfully");
-    //                 res.redirect('/login');
-    //             });
-    //         }
-    //     });
+        // Validate the password again as in the client side
+        var isValidPassword = new RegExp(
+            '^(?=.*[a-z])' + // must contain at least one lower case letter
+            '(?=.*[A-Z])' +  // must contain at least one upper case letter
+            '(?=.*[0-9])' +  // must contain at least one digit
+            '(?=.*[!@#$%^&*])' + // must contain at least one special char
+            '.{8,20}$' // must be at least 8 characters long and less than 20 chars
+        ).test(password);
 
-    // } catch (error) {
-    //     console.log(error);
-    //     res.redirect('/signup');
-    // }
+        if (!isValidPassword) {
+            console.log('Invalid password');
+            return res.redirect('/signup');
+        }
+
+        // Check again whether the username is already exist
+        let checkSql = 'SELECT * FROM user WHERE username = ?';
+        db.query(checkSql, [username], (err,result) => {
+            if (err) throw err;
+
+            if (result.length >0) {
+                // Detect username exist
+                console.log('Username is already token');
+                return res.redirect('./signup');
+            }
+            else {
+                insertUser(req, res);
+            }
+        });
+
+    } catch {
+        console.log(error);
+        res.redirect('/signup');
+    }
 });
+
+/* 
+    Insert User into the database
+*/
+
+async function insertUser (req, res) {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // JSON object
+    const user = {
+        username: req.body.username,
+        password: hashedPassword,
+        phone:req.body.phone,
+    };
+
+    let insertSql = 'INSERT INTO user SET ?';
+
+    db.query(insertSql, user, (err) => {
+        if (err) throw err;
+        console.log("User created successfully");
+        res.redirect('/login');
+    });
+}
+
 
 // Route to check if a username exists
 router.get('/checkUsername/:username', function(req, res) {
