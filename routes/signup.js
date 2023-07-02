@@ -65,11 +65,25 @@ router.post('/', async (req, res, next) => {
 async function insertUser (req, res) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    // JSON object
+    // check user type
+    let isUser = (req.body['user-type'] == "user");
+    let type;
+
+    // Creator = 0
+    // User = 1
+    if (isUser) {
+        type = 1;
+    }
+    else {
+        type = 0;
+    }
+
+   // JSON object
     const user = {
         username: req.body.username,
         password: hashedPassword,
-        phone:req.body.phone,
+        phone: req.body.phone,
+        usertype: type
     };
 
     let insertSql = 'INSERT INTO user SET ?';

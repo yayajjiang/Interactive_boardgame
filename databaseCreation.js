@@ -24,7 +24,8 @@ app.get('/createUserAccount', (req, res) => {
     (id int AUTO_INCREMENT PRIMARY KEY,\
         username VARCHAR(50) NOT NULL,\
         password VARCHAR(255) NOT NULL,\
-        phone VARCHAR(20) NOT NULL)';
+        phone VARCHAR(20) NOT NULL,\
+        type TINYINT(1) NOT NULL DEFAULT 1)';
 
     db.query(sql, err => {
         if (err) {
@@ -52,6 +53,17 @@ app.get('/User1', (req, res) => {
         res.send('User1 added');
     });
 });
+
+// app.get('/AddColumn', (req, res) => {
+//     let sql = 'ALTER TABLE user ADD COLUMN usertype TINYINT(1) NOT NULL DEFAULT 1';
+//     db.query(sql, err => {
+//         if (err) {
+//             throw err;
+//         }
+//         res.send('User Type column Added');
+//     });
+
+// })
 
 app.listen('3000', () => {
     console.log("Server Started at Port 3000");
