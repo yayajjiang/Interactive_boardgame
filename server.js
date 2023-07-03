@@ -18,3 +18,19 @@ db.connect(err => {
 });
 
 module.exports = db;
+
+
+/*
+    Automatically create connection
+*/
+
+// const mysql = require('mysql');
+// const pool = mysql.createPool({
+//   connectionLimit : 10,
+//   host            : 'localhost',
+//   user            : 'root',
+//   password        : '',
+//   database        : 'BoardGameDB'
+// });
+
+// module.exports = pool;

@@ -4,13 +4,22 @@ var bcrypt = require('bcrypt');
 
 const db = require('../server'); 
 
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/user');
+    }
+
+    next();
+}
+
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', checkNotAuthenticated, function(req, res, next) {
     res.render('signup');
 });
 
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkNotAuthenticated, async (req, res, next) => {
     try {
         const username = req.body.username;
         const password = req.body.password;
@@ -113,6 +122,7 @@ router.get('/checkUsername/:username', function(req, res) {
         }
     });
   });
+
 
 
 

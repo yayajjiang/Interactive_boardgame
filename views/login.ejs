@@ -9,6 +9,12 @@
     <% if (typeof message !== 'undefined') { %>
       <p><%= message %></p>
     <% } %>
+
+    <% if (messages.error) { %>
+      <label id="error-message">
+          <%= messages.error %>
+      </label>
+    <% } %>
     <form action="/login" method="post">
       <input type="text" id="username" name="username" placeholder="Username">
       <input type="password" id="password" name="password" placeholder="Password">

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome, <%= user.username %>!</h1>
+    <p>This is your home page.</p>
+
+    <!-- Logout Button -->
+    <form action="/user/logout?_method=DELETE" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
